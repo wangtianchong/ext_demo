@@ -34,9 +34,12 @@
 		<if test="parentId==null">
 			where parentId is null
 		</if>
-		<foreach collection="orders" item="o" open="order by "
-			separator="," close=" ">
-			${o.sort} ${o.desc}
-		</foreach>
+		<if test="orders!=null">
+			<foreach collection="orders" item="o" open="order by "
+				separator="," close=" ">
+				${o.sort} ${o.desc}
+			</foreach>
+		</if>
+
 	</select>
 </mapper>

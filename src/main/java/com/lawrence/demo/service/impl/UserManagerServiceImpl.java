@@ -45,6 +45,9 @@ public class UserManagerServiceImpl implements UserManagerService{
     @Transactional(rollbackFor=java.lang.Exception.class,propagation=Propagation.REQUIRED)
     @Override
     public void deleteUser(Integer id) {
+        User u=userDAO.findByID(id);
+        if(u==null)
+            throw new RuntimeException("该用户已不存在!");
         userDAO.deleteById(id);
         
     }

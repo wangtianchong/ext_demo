@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.lawrence.demo.dao.impl.MenuDAO;
+import com.lawrence.demo.dao.IMenuDAO;
 import com.lawrence.demo.po.Menu;
 import com.lawrence.demo.po.User;
 import com.lawrence.demo.service.MenuService;
@@ -16,7 +16,7 @@ import com.lawrence.demo.vo.TreeNode;
 @Service
 public class MenuServiceImpl implements MenuService {
     @Resource
-    private MenuDAO menuDAO;
+    private IMenuDAO menuDAO;
 
     @Override
     public List<TreeNode> getMenus(User user) {
