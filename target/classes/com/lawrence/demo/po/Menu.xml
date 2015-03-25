@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lawrence.demo.dao.mapper.MenuMapper">
+
+	<select id="findByID" parameterType="Integer" resultType="Menu">
+		select
+		* from `menu` where id=#{id}
+	</select>
+	<insert id="add" parameterType="Menu" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into `Menu`(name,parentId,leaf,url)
+		values(#{name},#{parentId},#{leaf},#{url})
+	</insert>
+	<update id="merge" parameterType="Menu">
+		update `menu` set
+		url = #{url},
+		name = #{name},
+		parentId = #{parentId},
+		leaf = #{leaf}
+		where id = #{id}
+	</update>
+	<delete id="deleteById" parameterType="Integer">
+		delete from `menu` where
+		id=#{id}
+	</delete>
+	<select id="findMenuByParenId" parameterType="java.util.Map"
+		resultType="Menu">
+		select id,name,parentId,leaf,url from `menu`
+		<if test="parentId!=null">
+			where parentId=#{parentId}
+		</if>
+		<if test="parentId==null">
+			where parentId is null
+		</if>
+		<foreach collection="orders" item="o" open="order by "
+			separator="," close=" ">
+			${o.sort} ${o.desc}
+		</foreach>
+	</select>
+</mapper>
